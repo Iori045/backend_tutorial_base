@@ -1,0 +1,102 @@
+openapi: 3.1.0
+info:
+  version: 0.0.1
+  title: comment API
+  termsOfService: 'https://users comment.com/terms/'
+  contact:
+    email: io.fuji16104.ri@gmail.com
+    url: 'http://CRUD/articles/{article_id}/comments'
+  license:
+    name: Apache 2.0
+  description: 
+servers:
+  - url: http://localhost/api
+    description: ローカル環境
+     variables:
+      env:
+        default: api
+        enum:
+          - api
+          - staging
+          - dev
+    description: 環境に応じたサーバー（api/staging/dev）
+
+paths:
+  /articles/{articleId}/comments:
+    get:
+      summary: コメント一覧の取得
+      description: 指定した記事のコメントを新しい順で取得
+      parameters:
+        - name: articleId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 成功時のレスポンス
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Comment'
+
+   post:
+      summary: コメントの読み取り
+      description: 
+      parameters:
+        - name: articleId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 成功時のレスポンス
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Comment'
+  put:
+      summary: コメントの更新
+      description: 
+      parameters:
+        - name: articleId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 成功時のレスポンス
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Comment'
+    delete:
+      summary: コメント削除
+      description: 
+      parameters:
+        - name: articleId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 成功時のレスポンス
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Comment'
+securitySchemes:
+  main_auth: OAuth2
+  api_key: HTTPヘッダーにキーを渡す
+  basic_auth: Basic認証
